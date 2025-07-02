@@ -1,5 +1,5 @@
 // Set constraints for the video stream
-var constraints = { video: { facingMode: "environment" }, audio: false };
+var constraints = { video: { facingMode: "user" }, audio: false };
 var track = null;
 
 // Define constants
@@ -25,11 +25,7 @@ function cameraStart() {
 cameraTrigger.onclick = function() {
     cameraSensor.width = cameraView.videoWidth;
     cameraSensor.height = cameraView.videoHeight;
-    cameraSensor.getContext("2d");
-    ctx.setTransform(1, 0, 0, 1, 0, 0);
-    ctx.translate(cameraSensor.width, 0);
-    ctx.scale(-1, 1);
-    ctx.drawImage(cameraView, 0, 0, cameraSensor.width, cameraSensor.height);
+    cameraSensor.getContext("2d").drawImage(cameraView, 0, 0);
     cameraOutput.src = cameraSensor.toDataURL("image/webp");
     cameraOutput.classList.add("taken");
     // track.stop();
